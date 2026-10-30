@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hearing Voice: a voice picked for your ears</title>
+<meta name="description" content="Enter your hearing test results and get the ElevenLabs voice and settings that suit your ears, with a hearing boost you can switch on and off.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%91%82%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header>
+  <h1>Hearing Voice</h1>
+  <p class="lead">Type in your hearing test results. We pick the ElevenLabs voice and settings that suit your ears, then let you hear it with and without a boost tailored to you.</p>
+</header>
+
+<main id="main">
+  <section aria-labelledby="h-step1" class="card">
+    <h2 id="h-step1"><span class="step">1</span> Your hearing test</h2>
+    <p>Enter the hearing level at each pitch in <abbr title="decibels hearing level">dB HL</abbr>, from an audiogram or the Apple Health hearing test (Health &rsaquo; Hearing &rsaquo; Hearing Test Results). Higher numbers mean a sound has to be louder before you hear it. Leave a box empty if that pitch wasn't tested.</p>
+    <div class="buttons">
+      <button type="button" id="example" class="secondary">Use example hearing</button>
+      <button type="button" id="clear" class="secondary">Clear</button>
+    </div>
+    <p id="example-note" class="note" hidden><strong>Example data:</strong> a made-up, typical age-related high-frequency loss. Not a real person's test.</p>
+    <form id="form" novalidate>
+      <table class="grid">
+        <caption class="sr-only">Hearing level in dB HL for each ear</caption>
+        <thead><tr><th scope="col">Pitch</th><th scope="col"><span class="dot left" aria-hidden="true"></span>Left ear</th><th scope="col"><span class="dot right" aria-hidden="true"></span>Right ear</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <p id="form-error" class="error" role="alert"></p>
+      <button type="submit" class="primary big">Find my voice</button>
+    </form>
+  </section>
+
+  <section aria-labelledby="h-step2" class="card" id="results" hidden>
+    <h2 id="h-step2"><span class="step">2</span> What your test says</h2>
+    <div id="summary" aria-live="polite"></div>
+  </section>
+
+  <section aria-labelledby="h-step3" class="card" id="voices-card" hidden>
+    <h2 id="h-step3"><span class="step">3</span> Your best voices</h2>
+    <ol id="voices" class="voices"></ol>
+  </section>
+
+  <section aria-labelledby="h-step4" class="card" id="listen-card" hidden>
+    <h2 id="h-step4"><span class="step">4</span> Listen</h2>
+    <label for="text">Sentence to speak <span class="hint">(up to 300 characters)</span></label>
+    <textarea id="text" maxlength="300" rows="3">Hello! This voice was picked for your ears, using your hearing test. Can you hear the difference when the boost is on?</textarea>
+    <p class="hint" id="count" aria-live="polite"></p>
+    <div class="switch-row">
+      <label class="switch"><input type="checkbox" id="boost" checked> <span>Hearing boost <strong id="boost-state">ON</strong></span></label>
+      <span class="hint">Switch it while the sample plays to hear the difference.</span>
+    </div>
+    <div class="buttons">
+      <button type="button" id="play" class="primary big">&#9654; Play sample</button>
+      <button type="button" id="stop" class="secondary" disabled>&#9632; Stop</button>
+    </div>
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+    <details>
+      <summary>How the boost works</summary>
+      <p>It uses the "half-gain rule", the classic starting point for hearing aids: each pitch is boosted by half of how far your hearing is above 20 dB HL, up to 20 dB. Each ear gets its own curve (left speaker for the left ear), so headphones work best. Playback is also made about 6 dB louder with a limiter so it never distorts.</p>
+      <div id="boost-table"></div>
+    </details>
+  </section>
+</main>
+
+<footer>
+  <p>A demo, not a medical device or a hearing aid fitting. Nothing you type is stored: hearing numbers stay in your browser, only the sentence and chosen voice are sent to ElevenLabs to make the speech.</p>
+  <p>Voices by <a href="https://elevenlabs.io">ElevenLabs</a>. Built at Grok Bot Build NorthWest, Preston.</p>
+</footer>
+
+<script src="match.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
